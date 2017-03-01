@@ -12,8 +12,6 @@
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />	
 
-	
-
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
@@ -22,6 +20,16 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
+	
+	<!--  MySQL Data Source Bean -->
+	  <beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <beans:property name="url" value ="qcont4156.cigcl8d9knyc.us-east-1.rds.amazonaws.com:3306/qc_db"/>
+        <beans:property name="username" value="qc4156"/>
+        <beans:property name="password" value="4156qcont!"/>
+        <beans:property name="validationQuery" value="SELECT 1"/>
+        <beans:property name="testOnBorrow" value="true"/>
+       </beans:bean>
 	
 	<!-- Imports user-defined @Controller beans that process client requests -->
 	<beans:import resource="controllers.xml" />
