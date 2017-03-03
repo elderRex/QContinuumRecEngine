@@ -1,9 +1,16 @@
-var app = angular.module("home", []);
+var app = angular.module('home', ['pathing_controller']);
 
-app.controller("homeController", function($scope, $http){
-	$scope.load = function(){
-		$http.get("/").then(function(response){
-			$scope.welcome = response.data;
-		})
+app.controller('homeController', ['$scope', '$http','$location','pathingService', function($scope, $http, $location,pathingService) {	
+
+	$scope.data = {};
+
+	$scope.load = function()
+	{
+		var url = pathingService.getCurrentPath("/get_all_user_data");
+		$http.get(url).then(function(response){
+			
+			$scope.data = response;
+		});
 	}
-})
+	
+}]);
