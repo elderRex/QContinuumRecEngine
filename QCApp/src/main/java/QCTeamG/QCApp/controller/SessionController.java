@@ -19,7 +19,7 @@ public class SessionController {
 	@Autowired
 	UsersDAO userDAO;
 	
-	public void setSessionData(HttpServletRequest httpServletRequest) {
+	public void setSession(HttpServletRequest httpServletRequest) {
 		
 		try {
 
@@ -37,7 +37,7 @@ public class SessionController {
 		}
 	}
 	
-	public Integer getUserIdFromSecurity(Principal principal) {
+	public Integer getSessionUserId(Principal principal) {
 		Integer uid = 0;
 		try 
 		{
