@@ -1,0 +1,38 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"  
+ xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+ xsi:schemaLocation="http://www.springframework.org/schema/beans  
+ http://www.springframework.org/schema/beans/spring-beans-3.1.xsd  
+ http://www.springframework.org/schema/security  
+ http://www.springframework.org/schema/security/spring-security-3.1.xsd">  
+  
+	<!--  Authentication -->
+  <http use-expressions="true">  
+  <access-denied-handler error-page="/errors/404" />
+  
+  <form-login login-page='/login' username-parameter="email"  
+   password-parameter="password" default-target-url="/setup"  
+   authentication-failure-url="/errors/authfailed" />  
+   
+  <logout logout-url="/logout" success-handler-ref="logoutHandler" />
+  
+  <session-management invalid-session-url="/" />
+  
+ </http>
+  
+<!--  authentication-success-handler-ref="customAuthenticationSuccessHandler" -->
+  
+ <authentication-manager>  
+  <authentication-provider>
+   <password-encoder ref="encoder" />
+   <jdbc-user-service data-source-ref="dataSource"  
+    users-by-username-query="select email,password, enabled from users where email=?"  
+    authorities-by-username-query="select email, role from user_roles where email=?  " />  
+  </authentication-provider>  
+ </authentication-manager>
+ 
+  <beans:bean id="encoder" 
+	class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+	<beans:constructor-arg name="strength" value="11" />
+  </beans:bean>
+  
+</beans:beans>  

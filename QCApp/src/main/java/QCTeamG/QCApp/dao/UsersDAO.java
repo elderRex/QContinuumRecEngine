@@ -2,6 +2,7 @@ package QCTeamG.QCApp.dao;
 
 import java.util.List;
 
+import QCTeamG.QCApp.entities.UserRolesEntity;
 import QCTeamG.QCApp.entities.UsersEntity;
 
 public interface UsersDAO 
@@ -27,5 +28,9 @@ public interface UsersDAO
 	public UsersEntity getUserByEmail(String user_email);
 	
 	public void activateUser(UsersEntity user);
+	
+	public void deleteUserRole(UserRolesEntity ure);
+	
+	public void setUserRole(UserRolesEntity ure);
     
 }

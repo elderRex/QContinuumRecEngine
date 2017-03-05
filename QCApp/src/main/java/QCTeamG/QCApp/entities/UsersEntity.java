@@ -23,12 +23,15 @@ public class UsersEntity {
     
     @Column(name="LASTNAME")
     private String lastname;
+    
+    @Column(name="ENABLED")
+    private boolean enabled;
  
     @Column(name="EMAIL")
     public String email;
     
-    @Column(name="username")
-    private String username;
+//    @Column(name="username")
+//    private String username;
     
     @Column(name="PASSWORD")
     private String password;
@@ -41,13 +44,13 @@ public class UsersEntity {
         this.email = email;
     }
     
-    public String getUserName() {
-        return username;
-    }
-        
-    public void setUserName(String un) {
-        this.username = un;
-    }
+//    public String getUserName() {
+//        return username;
+//    }
+//        
+//    public void setUserName(String un) {
+//        this.username = un;
+//    }
     
 	public String getPassword() {
 	  return password;
@@ -74,5 +77,13 @@ public class UsersEntity {
     }
     public void setId(Integer id) {
         this.id = id;
+    }
+    
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+    
+    public boolean getEnabled() {
+        return this.enabled;
     }
 }

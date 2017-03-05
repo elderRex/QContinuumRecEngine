@@ -9,7 +9,7 @@ pathing_controller.service('pathingService', function($location) {
 			var url = request;
 			if ($location.host() == "localhost")
     			{
-    				url = "/QCApp/spring/" + request;
+    				url = "/qc" + request;
     			}
 			return url;
 		}

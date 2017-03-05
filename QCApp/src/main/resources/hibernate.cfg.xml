@@ -18,6 +18,7 @@
     
         <!--  Entity Mappings -->
    		<mapping class="QCTeamG.QCApp.entities.UsersEntity" />
+   		<mapping class="QCTeamG.QCApp.entities.UserRolesEntity" />
      
     </session-factory>
 </hibernate-configuration>

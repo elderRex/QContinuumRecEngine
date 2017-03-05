@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import QCTeamG.QCApp.entities.UserRolesEntity;
 import QCTeamG.QCApp.entities.UsersEntity;
 
 @Repository
@@ -85,6 +86,14 @@ public class UsersDaoI implements UsersDAO  {
 		  Query cq = sessionFactory.getCurrentSession().createQuery("select u from UsersEntity u where u.username = :username");
 		  Object oe = cq.uniqueResult();
 		return (UsersEntity) oe;
+	}
+	
+	public void setUserRole(UserRolesEntity ure) {
+		this.sessionFactory.getCurrentSession().save(ure);
+	}
+	
+	public void deleteUserRole(UserRolesEntity ure) {
+		this.sessionFactory.getCurrentSession().delete(ure);
 	}
 
 
