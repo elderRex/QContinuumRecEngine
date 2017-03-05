@@ -72,6 +72,17 @@ public class HomeController {
 		return "setup";
 	}
 	
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	public String user(Model model) {
+		logger.info("Welcome home!");
+		model.addAttribute("controllerMessage",
+				"This is the message from the controller!");
+		
+		
+		
+		return "user";
+	}
+	
 	public String getHashPassword(String password) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String hashedPassword = passwordEncoder.encode(password);

@@ -13,6 +13,11 @@ app.controller('homeController', ['$scope', '$http','$location','pathingService'
 		});
 	}
 	
+	$scope.logout_user = function()
+	{
+		window.location.href = pathingService.getCurrentPath("/logout");
+	}
+	
 	// Register New User (Customer) (Just Email)
 	$scope.register_user = function() {
 		if ($scope.registration 
