@@ -10,14 +10,49 @@
   <access-denied-handler error-page="/errors/404" />
   
   <form-login login-page='/login' username-parameter="email"  
-   password-parameter="password" default-target-url="/setup"  
+   password-parameter="password" default-target-url="/setupdd"  
    authentication-failure-url="/errors/authfailed" />  
    
-  <logout logout-url="/logout" success-handler-ref="logoutHandler" />
+<!--   <logout logout-url="/logout" success-handler-ref="logoutHandler" /> -->
   
   <session-management invalid-session-url="/" />
   
  </http>
+ 
+  <beans:bean id="dataSource" name="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<beans:property name="url" value="jdbc:mysql://qcont4156.cigcl8d9knyc.us-east-1.rds.amazonaws.com:3306/qc_db" />
+		<beans:property name="username" value="qc4156" />
+		<beans:property name="password" value="4156qcont!" />
+	</beans:bean>
+	
+	 <beans:bean id="transactionManager"
+        class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <beans:property name="sessionFactory" ref="sessionFactory" />
+    </beans:bean>
+	
+	<!--  Hibernate Session Factory Bean Defined -->
+	 <beans:bean id="sessionFactory"
+        class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <beans:property name="dataSource" ref="dataSource" />
+        <beans:property name="configLocation">
+            <beans:value>classpath:hibernate.cfg.xml</beans:value>
+        </beans:property>
+        <beans:property name="configurationClass">
+            <beans:value>org.hibernate.cfg.AnnotationConfiguration</beans:value>
+        </beans:property>
+        <beans:property name="hibernateProperties">
+            <beans:props>
+                <beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</beans:prop>
+                <beans:prop key="hibernate.show_sql">true</beans:prop>
+            </beans:props>
+        </beans:property>
+    </beans:bean>  
+ 
+ 
+<!--  <beans:bean id="logoutHandler" class="QCTeamG.QCApp.controller.LogoutHandler" >
+	    <beans:constructor-arg name="strength" value="/qc" />
+	</beans:bean> -->
   
 <!--  authentication-success-handler-ref="customAuthenticationSuccessHandler" -->
   

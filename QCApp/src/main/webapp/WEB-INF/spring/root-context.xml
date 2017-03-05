@@ -6,6 +6,10 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 				
 	<import resource="db.xml" />
-		 
+	
+<!-- 	<bean id="logoutHandler" class="QCTeamG.QCApp.controller.LogoutHandler" >
+	    <constructor-arg value="/qc" />
+	</bean>
+		  -->
 	
 </beans>
