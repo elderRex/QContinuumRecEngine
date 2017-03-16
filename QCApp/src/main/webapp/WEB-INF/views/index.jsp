@@ -12,9 +12,6 @@
 </head>
 <body ng-app="home" ng-controller="homeController" ng-init="load()">
 	<h1>{{data}}</h1>
-	<jsp:include page="create_account.jsp"/>
-	<hr/>
-	<hr/>
-	<jsp:include page="login.jsp"/>
+ ACCOUNT SETUP
 </body>
 </html>

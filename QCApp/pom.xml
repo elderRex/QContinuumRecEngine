@@ -10,7 +10,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jetty.version>6.1.4</jetty.version>
-		<spring.version>3.0.5.RELEASE</spring.version>
+		<spring.version>3.1.1.RELEASE</spring.version>
 		<slf4j.version>1.5.10</slf4j.version>
 		<java.version>1.5</java.version>
 		<junit.version>4.8.2</junit.version>
@@ -26,6 +26,12 @@
 			<artifactId>validation-api</artifactId>
 			<version>1.0.0.GA</version>
 			<scope>compile</scope>
+		</dependency>
+		
+		<dependency>
+    			<groupId>com.google.code.gson</groupId>
+    			<artifactId>gson</artifactId>
+    			<version>2.3.1</version>
 		</dependency>
 
 		<dependency>
@@ -44,12 +50,41 @@
     			<version>3.0.1</version>
 		</dependency>
 		
+		<!--  Json Objects -->
+		<dependency>
+    			<groupId>org.json</groupId>
+    			<artifactId>json</artifactId>
+    			<version>20160810</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>3.6.0.Final</version>
 			<scope>compile</scope>
 		</dependency>
+		<!--  Javax Persistence -->
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<version>1.0.0.Final</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<!--  Hibernate core added -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>3.6.3.Final</version>
+		</dependency>
+		
+		<!--  Setup connection to MySQL -->
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>5.1.6</version>
+</dependency>
 
 		<dependency>
 			<groupId>hsqldb</groupId>
@@ -133,6 +168,40 @@
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 			<scope>test</scope>
+		</dependency>
+		
+		<!--  Javax Injection -->
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>	
+		
+		<!--  Security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>3.1.0.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>3.2.7.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>3.1.0.RELEASE</version>
+		</dependency>
+				<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>3.1.0.RELEASE</version>
+		</dependency>
+		        <dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>2.2</version>
 		</dependency>
 
 		<!-- logging -->

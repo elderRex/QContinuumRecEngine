@@ -10,11 +10,13 @@
 	<script type="text/javascript" src="<c:url value="/resources/js/login.js" />"> </script>
 
 </head>
-<body ng-app="home" ng-controller="homeController" ng-init="load()">
+<body ng-app="home" ng-controller="homeController">
 	<h1>{{data}}</h1>
-	<jsp:include page="create_account.jsp"/>
-	<hr/>
-	<hr/>
-	<jsp:include page="login.jsp"/>
+	Hello User, welcome Home!
+	
+	<button class="confirm-button"  ng-click="logout_user()">Logout</button>
+	
 </body>
 </html>
+
+

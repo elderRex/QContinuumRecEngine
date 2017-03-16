@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+ 
+<!--  Manages connection to database, and defines db entities -->
+<hibernate-configuration>
+    <session-factory>
+  
+        <property name="dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">qcont4156.cigcl8d9knyc.us-east-1.rds.amazonaws.com:3306/qc_db</property>
+        <property name="connection.username">qc4156</property>
+        <property name="connection.password">4156qcont!</property>
+        
+    		<property name="connection.validationQuery">SELECT 1</property>
+    		<property name="connection.testOnBorrow">true</property>
+    
+        <!--  Entity Mappings -->
+   		<mapping class="QCTeamG.QCApp.entities.UsersEntity" />
+   		<mapping class="QCTeamG.QCApp.entities.UserRolesEntity" />
+   		<mapping class="QCTeamG.QCApp.entities.ItemsEntity" />
+   		<mapping class="QCTeamG.QCApp.entities.ReviewsEntity" />
+   		<mapping class="QCTeamG.QCApp.entities.UserAnswersEntity" />
+     
+    </session-factory>
+</hibernate-configuration>
