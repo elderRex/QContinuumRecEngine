@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DB Reader</title>
+</head>
+<body>
+    <form action="/recommend_now/query" method="POST">
+        user to recommend : <input type="text" name="uid">
+        <input type="submit" name="squery" value="submit">
+    </form>
+    <table>
+        <tr>
+            <th>Recommend/Don't Recommend</th>
+            <th>Item ID</th>
+        </tr>
+        {% for item in gdata %}
+        <tr>
+            <th>{{item[0]}}</th>
+            <th>{{item[1]}}</th>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

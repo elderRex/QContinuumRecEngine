@@ -10,14 +10,6 @@ import QCRecommendation.QC_Prediction_Engine_Flask.NLP_processing.NLPblock as nl
     3. create training sets
 '''
 
-
-class reviewnlp:
-    def __init__(self):
-        self.data = collections.defaultdict(list)
-        self.train = {}
-        self.test = {}
-
-
 def main_func(target):
 
     mydb = dbi.mydb()
@@ -42,7 +34,8 @@ def main_func(target):
     rec = blc.predict()
     print rec
     return rec
-
+'''
 main_func('king.kong@kg.com')
 main_func('Mr.Spock@ms.com')
 main_func('luke.cage@lc.com')
+'''

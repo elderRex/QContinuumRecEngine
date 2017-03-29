@@ -49,4 +49,5 @@ class nlpblockbase:
     def predict(self):
         test_data = [self.feature_extration(x) for (x,y) in self.batch_test]
         result = self.model.classify_many(test_data)
-        return result
+        iids = [y for (x,y) in self.batch_test]
+        return [(x,y) for (x,y) in zip(result,iids)]
