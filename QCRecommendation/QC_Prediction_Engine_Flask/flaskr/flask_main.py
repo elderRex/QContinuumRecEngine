@@ -5,6 +5,7 @@ import json
 from sqlalchemy import *
 from sqlalchemy.pool import NullPool
 from flask import Flask, request, render_template, g, redirect, Response,url_for,send_from_directory
+from flask_cors import CORS,cross_origin
 
 #print sys.path
 sys.path.append("/home/ygu16/project/server_scripts")
@@ -13,6 +14,7 @@ from QCRecommendation.QC_Prediction_Engine_Flask.NLP_processing import NLPmain a
 
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/recommend_now/query',methods=['POST'])
 def Game_visualization_query_foo():

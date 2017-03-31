@@ -33,7 +33,26 @@ def main_func(target):
 
     rec = blc.predict()
     print rec
-    return rec
+
+    result = collections.defaultdict(list)
+
+    for (x,y) in rec:
+        result[y].append(x)
+
+    answer = []
+
+    def test(mylist):
+        cnt = 0
+        for i in mylist:
+            cnt += i
+        if cnt > 2:
+            return 1
+        return 0
+
+    for key in result:
+        answer.append((test(result[key]),key))
+
+    return answer
 '''
 main_func('king.kong@kg.com')
 main_func('Mr.Spock@ms.com')
