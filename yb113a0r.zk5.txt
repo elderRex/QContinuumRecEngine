@@ -1,0 +1,94 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	deleted:    QCApp/.project
+#	deleted:    QCApp/.settings/.jsdtscope
+#	deleted:    QCApp/.settings/org.eclipse.core.resources.prefs
+#	deleted:    QCApp/.settings/org.eclipse.jdt.core.prefs
+#	deleted:    QCApp/.settings/org.eclipse.m2e.core.prefs
+#	deleted:    QCApp/.settings/org.eclipse.wst.common.component
+#	deleted:    QCApp/.settings/org.eclipse.wst.common.project.facet.core.xml
+#	deleted:    QCApp/.settings/org.eclipse.wst.jsdt.ui.superType.container
+#	deleted:    QCApp/.settings/org.eclipse.wst.jsdt.ui.superType.name
+#	deleted:    QCApp/.settings/org.eclipse.wst.validation.prefs
+#	deleted:    QCApp/SourcesDocumentation.txt
+#	deleted:    QCApp/src/main/java/QCTeamG/QCApp/controller/HomeController.java
+#	deleted:    QCApp/src/main/java/QCTeamG/QCApp/controller/Login.java
+#	deleted:    QCApp/src/main/java/QCTeamG/QCApp/controller/LogoutHandler.java
+#	deleted:    QCApp/src/main/java/QCTeamG/QCApp/controller/SessionController.java
+#	deleted:    QCApp/src/main/java/QCTeamG/QCApp/dao/UsersDAO.java
+#	deleted:    QCApp/src/main/java/QCTeamG/QCApp/dao/UsersDaoI.java
+#	deleted:    QCApp/src/main/java/QCTeamG/QCApp/entities/ItemsEntity.java
+#	deleted:    QCApp/src/main/java/QCTeamG/QCApp/entities/ReviewsEntity.java
+#	deleted:    QCApp/src/main/java/QCTeamG/QCApp/entities/UserAnswersEntity.java
+#	deleted:    QCApp/src/main/java/QCTeamG/QCApp/entities/UserRolesEntity.java
+#	deleted:    QCApp/src/main/java/QCTeamG/QCApp/entities/UsersEntity.java
+#	deleted:    QCApp/src/main/java/QCTeamG/QCApp/entities/package-info.java
+#	deleted:    QCApp/src/main/resources/META-INF/persistence.xml
+#	deleted:    QCApp/src/main/resources/hibernate.cfg.xml
+#	deleted:    QCApp/src/main/resources/jdbc.properties
+#	deleted:    QCApp/src/main/resources/log4j.xml
+#	deleted:    QCApp/src/main/webapp/META-INF/MANIFEST.MF
+#	deleted:    QCApp/src/main/webapp/META-INF/context.xml
+#	deleted:    QCApp/src/main/webapp/WEB-INF/spring/app/controllers.xml
+#	deleted:    QCApp/src/main/webapp/WEB-INF/spring/app/servlet-context.xml
+#	deleted:    QCApp/src/main/webapp/WEB-INF/spring/db.xml
+#	deleted:    QCApp/src/main/webapp/WEB-INF/spring/root-context.xml
+#	deleted:    QCApp/src/main/webapp/WEB-INF/spring/security.xml
+#	deleted:    QCApp/src/main/webapp/WEB-INF/views/HTML/Failure Login.jsp
+#	deleted:    QCApp/src/main/webapp/WEB-INF/views/HTML/Login.jsp
+#	deleted:    QCApp/src/main/webapp/WEB-INF/views/HTML/My Comments page.jsp
+#	deleted:    QCApp/src/main/webapp/WEB-INF/views/HTML/My Friend page.jsp
+#	deleted:    QCApp/src/main/webapp/WEB-INF/views/HTML/Register.jsp
+#	deleted:    QCApp/src/main/webapp/WEB-INF/views/HTML/Success Login.jsp
+#	deleted:    QCApp/src/main/webapp/WEB-INF/views/HTML/Success Registeration.jsp
+#	deleted:    QCApp/src/main/webapp/WEB-INF/views/HTML/Topic Question.jsp
+#	deleted:    QCApp/src/main/webapp/WEB-INF/views/HTML/Topic choosing.jsp
+#	deleted:    QCApp/src/main/webapp/WEB-INF/views/HTML/Welcome Page.jsp
+#	deleted:    QCApp/src/main/webapp/WEB-INF/views/HTML/personal account page.jsp
+#	deleted:    QCApp/src/main/webapp/WEB-INF/views/HTML/recommendation detail.jsp
+#	deleted:    QCApp/src/main/webapp/WEB-INF/views/HTML/recommendation view.jsp
+#	deleted:    QCApp/src/main/webapp/WEB-INF/views/create_account.jsp
+#	deleted:    QCApp/src/main/webapp/WEB-INF/views/edit.jsp
+#	deleted:    QCApp/src/main/webapp/WEB-INF/views/home.jsp
+#	deleted:    QCApp/src/main/webapp/WEB-INF/views/list.jsp
+#	deleted:    QCApp/src/main/webapp/WEB-INF/views/login.jsp
+#	deleted:    QCApp/src/main/webapp/WEB-INF/views/partials/header.jsp
+#	deleted:    QCApp/src/main/webapp/WEB-INF/views/partials/navigation.jsp
+#	deleted:    QCApp/src/main/webapp/WEB-INF/views/partials/universal.jsp
+#	deleted:    QCApp/src/main/webapp/WEB-INF/views/profile.jsp
+#	deleted:    QCApp/src/main/webapp/WEB-INF/views/setup.jsp
+#	deleted:    QCApp/src/main/webapp/WEB-INF/views/user.jsp
+#	deleted:    QCApp/src/main/webapp/WEB-INF/web.xml
+#	deleted:    QCApp/src/main/webapp/resources/css/layout.css
+#	deleted:    QCApp/src/main/webapp/resources/css/profile.css
+#	deleted:    QCApp/src/main/webapp/resources/css/screen.css
+#	deleted:    QCApp/src/main/webapp/resources/jardir/gson-2.3.1.jar
+#	deleted:    QCApp/src/main/webapp/resources/jardir/javax.servlet-api-3.0.1.jar
+#	deleted:    QCApp/src/main/webapp/resources/jardir/json-20160810.jar
+#	deleted:    QCApp/src/main/webapp/resources/jardir/mysql-connector-java-5.1.6.jar
+#	deleted:    QCApp/src/main/webapp/resources/js/account.js
+#	deleted:    QCApp/src/main/webapp/resources/js/login.js
+#	deleted:    QCApp/src/main/webapp/resources/js/pathing.js
+#	deleted:    QCApp/src/main/webapp/resources/js/user.js
+#	deleted:    QCApp/src/test/resources/log4j.xml
+#	deleted:    QCApp/target/classes/META-INF/persistence.xml
+#	deleted:    QCApp/target/classes/QCTeamG/QCApp/controller/HomeController.class
+#	deleted:    QCApp/target/classes/QCTeamG/QCApp/controller/SessionController.class
+#	deleted:    QCApp/target/classes/QCTeamG/QCApp/dao/UsersDAO.class
+#	deleted:    QCApp/target/classes/QCTeamG/QCApp/dao/UsersDaoI.class
+#	deleted:    QCApp/target/classes/QCTeamG/QCApp/entities/UsersEntity.class
+#	deleted:    QCApp/target/classes/QCTeamG/QCApp/entities/package-info.class
+#	deleted:    QCApp/target/classes/hibernate.cfg.xml
+#	deleted:    QCApp/target/classes/jdbc.properties
+#	deleted:    QCApp/target/classes/log4j.xml
+#	deleted:    QCApp/target/m2e-wtp/web-resources/META-INF/MANIFEST.MF
+#	deleted:    QCApp/target/m2e-wtp/web-resources/META-INF/maven/QCTeam/qc/pom.properties
+#	deleted:    QCApp/target/m2e-wtp/web-resources/META-INF/maven/QCTeam/qc/pom.xml
+#	deleted:    QCApp/target/test-classes/log4j.xml
+#
+
