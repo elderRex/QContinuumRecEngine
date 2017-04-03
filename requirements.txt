@@ -1,0 +1,6 @@
+nltk
+sqlalchemy
+flask
+sklearn
+yelp
+simplejson
