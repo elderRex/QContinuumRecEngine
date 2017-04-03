@@ -9,7 +9,8 @@ install:
   - "pip install -r requirements.txt"
   - "pip install -U scikit-learn"
 # command to run tests
-script: pytest
+script:
+  - "python this_test"
 branches:
   only:
     master
