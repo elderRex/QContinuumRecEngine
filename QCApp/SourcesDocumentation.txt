@@ -1,9 +1,0 @@
-Documentation of Third Party Code
-
-1. As an example of user authentication using Spring Security, parts of the following source
-were used as an inspiration for the code in the following files : Security.xml,Login.Java,
-LogoutHandler.java, and in the MySQL database table user_roles.
-
-http://www.mkyong.com/spring-security/spring-security-form-login-using-database/
-
-2. 
