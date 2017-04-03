@@ -2,6 +2,7 @@ numpy
 scipy
 nltk
 sqlalchemy
+pytest
 flask
 scikit-learn
 yelp
