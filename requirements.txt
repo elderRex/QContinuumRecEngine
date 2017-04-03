@@ -1,6 +1,8 @@
+numpy
+scipy
 nltk
 sqlalchemy
 flask
-sklearn
+scikit-learn
 yelp
 simplejson
