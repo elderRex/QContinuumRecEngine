@@ -1,0 +1,1 @@
+from QCRecommendation.QC_Prediction_Engine_Flask.flaskr.flask_main import app
