@@ -4,6 +4,7 @@ nltk
 sqlalchemy
 pytest
 flask
+flask_cors
 yelp
 simplejson
 MySQL-python
