@@ -19,6 +19,8 @@ def main_func(target):
         test_reviews = conn.execute("SELECT * FROM qc.reviews as b where b.id not in(select rid from qc.user_answers)")
     except Exception:
         return (-1,-1)
+    #if not train_reviews.fetchall() or not test_reviews.fetchall():
+    #    return (-1,-1)
     #create processing block
     blc = nlpb.nlpblockbase()
     blc.set_params(target)
