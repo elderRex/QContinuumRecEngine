@@ -14,8 +14,11 @@ def main_func(target):
 
     mydb = dbi.mydb()
     conn = mydb.engine.connect()
-    train_reviews = conn.execute("SELECT a.uid,review_text,a.does_like FROM qc_db.user_answers as a, qc_db.reviews as b where a.rid = b.id and a.uid = '"+target+"'")
-    test_reviews = conn.execute("SELECT * FROM qc_db.reviews as b where b.id not in(select rid from qc_db.user_answers)")
+    try:
+        train_reviews = conn.execute("SELECT a.uid,review_text,a.does_like FROM qc.user_answers as a, qc.reviews as b where a.rid = b.id and a.uid = '"+target+"'")
+        test_reviews = conn.execute("SELECT * FROM qc.reviews as b where b.id not in(select rid from qc.user_answers)")
+    except Exception:
+        return (-1,-1)
     #create processing block
     blc = nlpb.nlpblockbase()
     blc.set_params(target)
@@ -32,7 +35,7 @@ def main_func(target):
     blc.train()
 
     rec = blc.predict()
-    print rec
+    #print rec
 
     result = collections.defaultdict(list)
 
