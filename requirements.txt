@@ -6,4 +6,4 @@ pytest
 flask
 yelp
 simplejson
-python-mysqldb
+MySQL-python
