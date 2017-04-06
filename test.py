@@ -4,10 +4,10 @@ import QCRecommendation.QC_Prediction_Engine_Flask.NLP_processing.NLPblock as nl
 import QCRecommendation.QC_Prediction_Engine_Flask.NLP_processing.NLPmain as nlpm
 
 import os
-import flask
+from QCRecommendation.QC_Prediction_Engine_Flask.flaskr import flask_main as flaskr
 import tempfile
 
-class testcase(unittest.TestCase):
+class FlaskrTestCase(unittest.TestCase):
 
     def test_db(self):
         ndb = dbi.mydb()
@@ -40,19 +40,23 @@ class testcase(unittest.TestCase):
 
     def test_main(self):
         self.assertIsNotNone(nlpm.main_func(84))
-'''
-class FlaskrTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.db_fd, flaskr.app.config['DATABASE'] = tempfile.mkstemp()
-        flaskr.app.config['TESTING'] = True
         self.app = flaskr.app.test_client()
-        with flaskr.app.app_context():
-            flaskr.init_db()
 
-    def tearDown(self):
-        os.close(self.db_fd)
-        os.unlink(flaskr.app.config['DATABASE'])
-'''
+    #def tearDown(self):
+
+    def query(self,uid):
+        return self.app.post('/recommend_now/query',data=dict(uid=uid))
+
+    def open_query(self,uid):
+        return self.app.post('/recommend/query',data=dict(uid=uid))
+
+    def test_query_open_query(self):
+        rv = self.query('87')
+        assert '-1' not in rv.data
+        rv = self.open_query('87')
+        assert '-1' not in rv.data
+
 if __name__ == '__main__':
     unittest.main()
