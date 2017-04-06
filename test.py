@@ -4,7 +4,7 @@ import QCRecommendation.QC_Prediction_Engine_Flask.NLP_processing.NLPblock as nl
 import QCRecommendation.QC_Prediction_Engine_Flask.NLP_processing.NLPmain as nlpm
 
 import os
-import flaskr
+import flask
 import tempfile
 
 class testcase(unittest.TestCase):
@@ -13,6 +13,7 @@ class testcase(unittest.TestCase):
         ndb = dbi.mydb()
         conn = ndb.engine.connect()
         self.assertIsNotNone(conn)
+        conn.close()
 
     def test_db2(self):
         ndb = dbi.mydb()
@@ -35,6 +36,7 @@ class testcase(unittest.TestCase):
             # print row
             blc.batch_test.append((row[3], row[4]))
         self.assertEqual(blc.train(),1)
+        conn.close()
 
     def test_main(self):
         self.assertIsNotNone(nlpm.main_func(84))
