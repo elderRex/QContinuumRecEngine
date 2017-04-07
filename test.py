@@ -5,6 +5,7 @@ import QCRecommendation.QC_Prediction_Engine_Flask.NLP_processing.NLPmain as nlp
 
 import os
 from QCRecommendation.QC_Prediction_Engine_Flask.flaskr import flask_main as flaskr
+from QCRecommendation.QC_Prediction_Engine_Flask.NLP_processing import NLPtagger as nlpt
 import tempfile
 
 class FlaskrTestCase(unittest.TestCase):
@@ -18,6 +19,8 @@ class FlaskrTestCase(unittest.TestCase):
     def test_db2(self):
         ndb = dbi.mydb()
         conn = ndb.engine.connect()
+        c_tagger = nlpt.nlp_tagger()
+        c_tagger.train()
         blc = nlpb.nlpblockbase()
         blc.set_params(84)
         try:
@@ -35,11 +38,15 @@ class FlaskrTestCase(unittest.TestCase):
         for row in test_reviews:
             # print row
             blc.batch_test.append((row[3], row[4]))
-        self.assertEqual(blc.train(),1)
+        self.assertEqual(blc.train(c_tagger),1)
         conn.close()
 
     def test_main(self):
-        self.assertIsNotNone(nlpm.main_func(84))
+        mydb = dbi.mydb()
+        conn = mydb.engine.connect()
+        c_tagger = nlpt.nlp_tagger()
+        c_tagger.train()
+        self.assertIsNotNone(nlpm.main_func(84,conn,c_tagger))
 
     def setUp(self):
         self.app = flaskr.app.test_client()
