@@ -6,13 +6,13 @@ from sqlalchemy import *
 from sqlalchemy.pool import NullPool
 from flask import Flask, request, render_template, g, redirect, Response,url_for,send_from_directory
 from flask_cors import CORS,cross_origin
-import QCRecommendation.QC_Prediction_Engine_Flask.db_initialization as dbi
 
 #print sys.path
 sys.path.append("/home/ygu16/project/server_scripts")
 #print sys.path
 from QCRecommendation.QC_Prediction_Engine_Flask.NLP_processing import NLPmain as nlpm
 from QCRecommendation.QC_Prediction_Engine_Flask.NLP_processing import NLPtagger as nlpt
+import QCRecommendation.QC_Prediction_Engine_Flask.db_initialization as dbi
 
 #db initialization
 mydb = dbi.mydb()
