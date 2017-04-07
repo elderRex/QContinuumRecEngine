@@ -30,6 +30,8 @@ class FlaskrTestCase(unittest.TestCase):
                 "SELECT * FROM qc.reviews as b where b.id not in(select rid from qc.user_answers)")
         except Exception:
             return (-1, -1)
+        if not train_reviews.rowcount or not test_reviews.rowcount:
+            self.assertEqual(1, 1)
         for row in train_reviews:
             # print row[0],row[2]
             # item,label
