@@ -19,4 +19,4 @@ class nlp_tagger:
 
         self.re_tagger = nltk.RegexpTagger(self.patterns)
         self.bi_tagger = BigramTagger(brown.tagged_sents(), backoff=self.re_tagger)
-        self.tri_tagger = TrigramTagger(brown.tagged_sents, backoff=self.bi_tagger)
+        self.tri_tagger = TrigramTagger(brown.tagged_sents(), backoff=self.bi_tagger)
