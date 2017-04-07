@@ -6,11 +6,11 @@ branches:
   only:
     master
 before_install:
-  - python -m nltk.downloader all
   - pip install --upgrade pip
   - pip install --upgrade numpy
 install:
   - "pip install -r requirements.txt"
+  - python -m nltk.downloader all
   - "pip install -U scikit-learn"
 # command to run tests
 script:
