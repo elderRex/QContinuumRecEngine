@@ -50,13 +50,15 @@ class nlpblockbase:
         #extract features
         features = {}
 
-        tokens = nltk.word_tokenize(review)
-        tags = tagger.tri_tagger.tag(tokens)
+        sents = review.decode('utf-8').split('.')
 
-        features = {}
-        for (x,y) in tags:
-            if y in tagger.target:
-                features[y] = features.get(y,0)+1
+        for sent in sents:
+            tokens = nltk.word_tokenize(sent)
+            tags = tagger.tri_tagger.tag(tokens)
+
+            for (x,y) in tags:
+                if y in tagger.target:
+                    features[y] = features.get(y,0)+1
 
         #features['lastc'] = sent[-1]
 
