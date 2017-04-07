@@ -10,10 +10,14 @@ import QCRecommendation.QC_Prediction_Engine_Flask.NLP_processing.NLPblock as nl
     3. create training sets
 '''
 
-def main_func(target):
+def start_training(conn):
+    train_reviews = conn.execute(
+        "SELECT a.uid,review_text,a.does_like FROM qc.user_answers as a, qc.reviews as b where a.rid = b.id and a.uid = '" + target + "'")
 
-    mydb = dbi.mydb()
-    conn = mydb.engine.connect()
+    return True
+
+def main_func(target,conn,tagger):
+
     try:
         train_reviews = conn.execute("SELECT a.uid,review_text,a.does_like FROM qc.user_answers as a, qc.reviews as b where a.rid = b.id and a.uid = '"+target+"'")
         test_reviews = conn.execute("SELECT * FROM qc.reviews as b where b.id not in(select rid from qc.user_answers)")
@@ -34,9 +38,9 @@ def main_func(target):
         blc.batch_test.append((row[3],row[4]))
     #print blc.batch_test
     #print blc.answers
-    blc.train()
+    blc.train(tagger)
 
-    rec = blc.predict()
+    rec = blc.predict(tagger)
     #print rec
 
     result = collections.defaultdict(list)
