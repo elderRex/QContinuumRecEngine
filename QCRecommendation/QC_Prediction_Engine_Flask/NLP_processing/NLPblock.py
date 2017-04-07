@@ -46,12 +46,12 @@ class nlpblockbase:
 
         return 1
 
-    def feature_extration(self,sent,tagger):
+    def feature_extration(self,review,tagger):
         #extract features
         features = {}
 
-        tokens = nltk.word_tokenize(sent)
-        tags = tagger.tri_tagger.tag(sent)
+        tokens = nltk.word_tokenize(review)
+        tags = tagger.tri_tagger.tag(tokens)
 
         features = {}
         for (x,y) in tags:
