@@ -51,7 +51,7 @@ class nlpblockbase:
         features = {}
 
         tokens = nltk.word_tokenize(sent)
-        tags = tagger.tag(sent)
+        tags = tagger.tri_tagger.tag(sent)
 
         features = {}
         for (x,y) in tags:

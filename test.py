@@ -22,7 +22,7 @@ class FlaskrTestCase(unittest.TestCase):
         c_tagger = nlpt.nlp_tagger()
         c_tagger.train()
         blc = nlpb.nlpblockbase()
-        blc.set_params(84)
+        blc.set_params('87')
         try:
             train_reviews = conn.execute(
                 "SELECT a.uid,review_text,a.does_like FROM qc.user_answers as a, qc.reviews as b where a.rid = b.id and a.uid = '" + target + "'")
@@ -46,7 +46,7 @@ class FlaskrTestCase(unittest.TestCase):
         conn = mydb.engine.connect()
         c_tagger = nlpt.nlp_tagger()
         c_tagger.train()
-        self.assertIsNotNone(nlpm.main_func(84,conn,c_tagger))
+        self.assertIsNotNone(nlpm.main_func('87',conn,c_tagger))
 
     def setUp(self):
         self.app = flaskr.app.test_client()
