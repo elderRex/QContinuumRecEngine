@@ -33,7 +33,7 @@ def Game_visualization_query_foo():
 def recommend_foo():
     userid = request.form.get('uid')
     ans = nlpm.main_func(str(userid),c_tagger)
-    print ans
+    print json.dumps(ans)
     return json.dumps(ans)
 
 @app.route("/")
