@@ -48,7 +48,8 @@ class FlaskrTestCase(unittest.TestCase):
         conn = mydb.engine.connect()
         c_tagger = nlpt.nlp_tagger()
         c_tagger.train()
-        self.assertIsNotNone(nlpm.main_func('87',conn,c_tagger))
+        self.assertIsNotNone(nlpm.main_func('87',c_tagger))
+        conn.close()
 
     def setUp(self):
         self.app = flaskr.app.test_client()
