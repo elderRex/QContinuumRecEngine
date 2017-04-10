@@ -10,13 +10,17 @@ import QCRecommendation.QC_Prediction_Engine_Flask.NLP_processing.NLPblock as nl
     3. create training sets
 '''
 
-def start_training(conn):
+def start_training():
+    mydb = dbi.mydb()
+    conn = mydb.engine.connect()
     train_reviews = conn.execute(
         "SELECT a.uid,review_text,a.does_like FROM qc.user_answers as a, qc.reviews as b where a.rid = b.id and a.uid = '" + target + "'")
-
+    conn.close()
     return True
 
-def main_func(target,conn,tagger):
+def main_func(target,tagger):
+    mydb = dbi.mydb()
+    conn = mydb.engine.connect()
 
     try:
         train_reviews = conn.execute("SELECT a.uid,review_text,a.does_like FROM qc.user_answers as a, qc.reviews as b where a.rid = b.id and a.uid = '"+target+"'")
@@ -25,20 +29,23 @@ def main_func(target,conn,tagger):
         return (-1,-1)
     if not train_reviews.rowcount or not test_reviews.rowcount:
         return (-2,-2)
+    conn.close()
     #create processing block
     blc = nlpb.nlpblockbase()
     blc.set_params(target)
-    for row in train_reviews:
-        #print row[0],row[2]
-        #item,label
-        blc.answers.append((row[1],row[2]))
-    print [y for (x,y) in blc.answers]
+    if not blc.load_model():
+        for row in train_reviews:
+            #print row[0],row[2]
+            #item,label
+            blc.answers.append((row[1],row[2]))
+        blc.train(tagger)
+        blc.save_model()
+    #print [y for (x,y) in blc.answers]
     for row in test_reviews:
         #print row
         blc.batch_test.append((row[3],row[4]))
     #print blc.batch_test
     #print blc.answers
-    blc.train(tagger)
 
     rec = blc.predict(tagger)
     #print rec
@@ -60,7 +67,6 @@ def main_func(target,conn,tagger):
 
     for key in result:
         answer.append((test(result[key]),key))
-
     return answer
 '''
 main_func('king.kong@kg.com')

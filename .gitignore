@@ -2,3 +2,4 @@
 /admin_credential.py
 /QC_Collection_Engine/*.json
 /QC_Prediction_Engine_Flask/db_initialization.py
+/personal_test.py
