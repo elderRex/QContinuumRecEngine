@@ -23,17 +23,21 @@ c_tagger.train()
 app = Flask(__name__)
 CORS(app)
 
+
 @app.route('/recommend_now/query',methods=['POST'])
 def Game_visualization_query_foo():
     userid = request.form.get('uid')
-    ans = nlpm.main_func(str(userid),c_tagger)
+    ans = nlpm.load_result(userid)
+    if not ans:
+        ans = nlpm.main_func(str(userid),c_tagger)
     return render_template('index.html',gdata = ans)
 
 @app.route('/recommend/query',methods=['POST'])
 def recommend_foo():
     userid = request.form.get('uid')
-    ans = nlpm.main_func(str(userid),c_tagger)
-    print json.dumps(ans)
+    ans = nlpm.load_result(userid)
+    if not ans:
+        ans = nlpm.main_func(str(userid),c_tagger)
     return json.dumps(ans)
 
 @app.route("/")

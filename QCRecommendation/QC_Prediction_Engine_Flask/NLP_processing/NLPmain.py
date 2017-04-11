@@ -2,6 +2,9 @@ import nltk as nlt
 import collections
 import QCRecommendation.QC_Prediction_Engine_Flask.db_initialization as dbi
 import QCRecommendation.QC_Prediction_Engine_Flask.NLP_processing.NLPblock as nlpb
+import os.path
+import sys,os
+import json
 
 '''
     Function:
@@ -19,6 +22,7 @@ def start_training():
     return True
 
 def main_func(target,tagger):
+
     mydb = dbi.mydb()
     conn = mydb.engine.connect()
 
@@ -67,7 +71,27 @@ def main_func(target,tagger):
 
     for key in result:
         answer.append((test(result[key]),key))
+    cache_result(answer,target)
     return answer
+
+def cache_result(data,uid):
+    __pat = os.path.dirname(os.path.abspath(__file__))
+    fname = __pat + '/saved_results/cache' + uid + ".json"
+    with open(fname,'w+') as outfile:
+        for x,y in data:
+            outfile.write(x+','+y)
+    return 1
+
+def load_result(uid):
+    __pat = os.path.dirname(os.path.abspath(__file__))
+    fname = __pat + '/saved_results/cache' + uid + ".json"
+    data = []
+    if os.path.exists(fname):
+        with open(fname) as data_file:
+            for row in data_file:
+                params = row.strip().split(',')
+                data.append((params[0],params[1]))
+    return data
 '''
 main_func('king.kong@kg.com')
 main_func('Mr.Spock@ms.com')
