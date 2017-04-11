@@ -76,17 +76,19 @@ def main_func(target,tagger):
 
 def cache_result(data,uid):
     __pat = os.path.dirname(os.path.abspath(__file__))
-    fname = __pat + '/saved_results/cache' + uid + ".json"
+    fname = __pat + '/saved_results/cache' + uid + ".txt"
     with open(fname,'w+') as outfile:
         for x,y in data:
-            outfile.write(x+','+y)
+            outfile.write(str(x)+','+str(y)+'\n')
     return 1
 
 def load_result(uid):
     __pat = os.path.dirname(os.path.abspath(__file__))
-    fname = __pat + '/saved_results/cache' + uid + ".json"
+    fname = __pat + '/saved_results/cache' + uid + ".txt"
+    print fname
     data = []
     if os.path.exists(fname):
+        print 'found'
         with open(fname) as data_file:
             for row in data_file:
                 params = row.strip().split(',')
