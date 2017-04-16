@@ -28,7 +28,7 @@ def main_func(target,tagger):
 
     try:
         train_reviews = conn.execute("SELECT a.uid,review_text,a.does_like FROM qc.user_answers as a, qc.reviews as b where a.rid = b.id and a.uid = '"+target+"'")
-        test_reviews = conn.execute("SELECT * FROM qc.reviews as b where b.id not in(select rid from qc.user_answers)")
+        test_reviews = conn.execute("SELECT * FROM qc.reviews as b where b.id not in(select rid from qc.user_answers where uid = '"+target+"')")
     except Exception:
         return (-1,-1)
     if not train_reviews.rowcount or not test_reviews.rowcount:
@@ -56,22 +56,26 @@ def main_func(target,tagger):
 
     result = collections.defaultdict(list)
 
-    for (x,y) in rec:
-        result[y].append(x)
+    for (rec,text,iid) in rec:
+        result[iid].append((rec,text))
 
     answer = []
 
     def test(mylist):
-        cnt = 0
-        for i in mylist:
-            cnt += i
+        cnt,tmp = 0,[]
+        for (x,y) in mylist:
+            if x == 1:
+                cnt += 1
+                tmp.append([y])
         if cnt > 2:
-            return 1
-        return 0
+            return 1,tmp
+        return 0,tmp
 
     for key in result:
         answer.append((test(result[key]),key))
     cache_result(answer,target)
+    for i in range(5):
+        print answer[i]
     return answer
 
 def cache_result(data,uid):

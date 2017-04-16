@@ -88,5 +88,5 @@ class nlpblockbase:
         test_data = [self.feature_extration(x,tagger) for (x,y) in self.batch_test]
         #print test_data
         result = self.model.classify_many(test_data)
-        iids = [y for (x,y) in self.batch_test]
-        return [(x,y) for (x,y) in zip(result,iids)]
+        #iids = [y for (x,y) in self.batch_test]
+        return [(res,text,iid) for res,(text,iid) in zip(result,self.batch_test)]
