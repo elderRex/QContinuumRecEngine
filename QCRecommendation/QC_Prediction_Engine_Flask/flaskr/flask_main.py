@@ -34,6 +34,7 @@ def Game_visualization_query_foo():
         ans = nlpm.main_func(str(userid),c_tagger)
     else:
         print 'loaded'
+    print json.dumps(ans, ensure_ascii=False)
     return render_template('index.html',gdata = ans)
 
 @app.route('/recommend/query',methods=['POST'])
@@ -46,11 +47,12 @@ def recommend_foo():
         ans = nlpm.main_func(str(userid),c_tagger)
     else:
         print 'loaded'
-    return json.dumps(ans)
+    print json.dumps(ans,ensure_ascii=False)
+    return json.dumps(ans,ensure_ascii=False)
 
 @app.route("/")
 def hello():
     return render_template('index.html')
 
 if __name__ == "__main__":
-    app.run(host = '0.0.0.0', debug = True)
+    app.run(host = '0.0.0.0', debug = True,threaded=True)

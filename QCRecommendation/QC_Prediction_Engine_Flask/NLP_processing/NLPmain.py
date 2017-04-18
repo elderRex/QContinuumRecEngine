@@ -5,6 +5,7 @@ import QCRecommendation.QC_Prediction_Engine_Flask.NLP_processing.NLPblock as nl
 import os.path
 import sys,os
 import json
+import csv
 
 '''
     Function:
@@ -28,7 +29,7 @@ def main_func(target,tagger):
 
     try:
         train_reviews = conn.execute("SELECT a.uid,review_text,a.does_like FROM qc.user_answers as a, qc.reviews as b where a.rid = b.id and a.uid = '"+target+"'")
-        test_reviews = conn.execute("SELECT * FROM qc.reviews as b where b.id not in(select rid from qc.user_answers where uid = '"+target+"')")
+        test_reviews = conn.execute("SELECT * FROM qc.reviews as b where b.id not in(select rid from qc.user_answers where uid = '"+target+"') limit 10000")
     except Exception:
         return (-1,-1)
     if not train_reviews.rowcount or not test_reviews.rowcount:
@@ -66,37 +67,40 @@ def main_func(target,tagger):
         for (x,y) in mylist:
             if x == 1:
                 cnt += 1
-                tmp.append([y])
+                #tmp.append([y])
         if cnt > 2:
-            return 1,tmp
-        return 0,tmp
+            return 1
+        return 0
 
     for key in result:
         answer.append((test(result[key]),key))
-    cache_result(answer,target)
     for i in range(5):
         print answer[i]
+    cache_result(answer,target)
     return answer
 
 def cache_result(data,uid):
     __pat = os.path.dirname(os.path.abspath(__file__))
-    fname = __pat + '/saved_results/cache' + uid + ".txt"
+    fname = __pat + '/saved_results/cache' + uid + ".csv"
     with open(fname,'w+') as outfile:
-        for x,y in data:
-            outfile.write(str(x)+','+str(y)+'\n')
+        fieldnames = ['rec', 'iid']
+        writer = csv.DictWriter(outfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for item in data:
+            writer.writerow({'rec':str(item[0]),'iid':str(item[1])})
     return 1
 
 def load_result(uid):
     __pat = os.path.dirname(os.path.abspath(__file__))
-    fname = __pat + '/saved_results/cache' + uid + ".txt"
+    fname = __pat + '/saved_results/cache' + uid + ".csv"
     print fname
     data = []
     if os.path.exists(fname):
         print 'found'
         with open(fname) as data_file:
-            for row in data_file:
-                params = row.strip().split(',')
-                data.append((params[0],params[1]))
+            csvreader = csv.DictReader(data_file)
+            for row in csvreader:
+                data.append((row['rec'],row['iid']))
     return data
 '''
 main_func('king.kong@kg.com')
