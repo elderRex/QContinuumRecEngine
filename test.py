@@ -63,9 +63,9 @@ class FlaskrTestCase(unittest.TestCase):
         return self.app.post('/recommend/query',data=dict(uid=uid))
 
     def test_query_open_query(self):
-        rv = self.query('87')
+        rv = self.query('141')
         assert '-1' not in rv.data
-        rv = self.open_query('87')
+        rv = self.open_query('141')
         assert '-1' not in rv.data
 
 if __name__ == '__main__':
