@@ -48,7 +48,8 @@ class nlpblockbase:
 
     def save_model(self):
         fname = self._path+'/saved_models/model'+self.user_id+".sav"
-        pickle.dump(self.model,open(fname,'w+b'))
+        with open(fname,'w+') as f:
+            pickle.dump(self.model,f)
 
     def load_model(self):
 
