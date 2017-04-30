@@ -17,7 +17,6 @@ import QCRecommendation.QC_Prediction_Engine_Flask.db_initialization as dbi
 #db initialization
 
 c_tagger = nlpt.nlp_tagger()
-c_tagger.train()
 
 
 app = Flask(__name__)

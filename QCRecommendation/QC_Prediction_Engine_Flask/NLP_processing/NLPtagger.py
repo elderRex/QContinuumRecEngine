@@ -13,7 +13,7 @@ class nlp_tagger:
             (r'.*ful$', 'JJ'),
             (r'.*', 'NN')
         ]
-        self.target = ['NN','JJ','JJR','JJS','VB','VBZ','RB']
+        self.target = ['NN','JJ','JJR','RB','PRP','VBZ','RB']
 
     def train(self):
 

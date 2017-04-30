@@ -14,27 +14,24 @@ import csv
     3. create training sets
 '''
 
-def start_training():
+def data_retriever(target):
     mydb = dbi.mydb()
     conn = mydb.engine.connect()
-    train_reviews = conn.execute(
-        "SELECT a.uid,review_text,a.does_like FROM qc.user_answers as a, qc.reviews as b where a.rid = b.id and a.uid = '" + target + "'")
+    print 'nlpm',target,"select a.uid,a.does_like,b.*,c.subject FROM qc.user_answers a, qc.reviews b, qc.items c where a.rid = b.id and a.uid = '"+str(target)+"' and b.iid=c.id"
+    try:
+        train_reviews = conn.execute("select a.uid,a.does_like,b.*,c.subject FROM qc.user_answers a, qc.reviews b, qc.items c where a.rid = b.id and a.uid = '"+str(target)+"' and b.iid=c.id").fetchall()
+        test_reviews = conn.execute("select r.*,u.subject from qc.reviews r, qc.items u where r.iid = u.id and r.id not in(select rid from qc.user_answers where uid = '"+str(target)+"') limit 10").fetchall()
+    except Exception:
+        return (-1,-1)
+    if not len(train_reviews) or not len(test_reviews):
+        return (-2,-2)
     conn.close()
-    return True
+
+    return train_reviews,test_reviews
 
 def main_func(target,tagger):
 
-    mydb = dbi.mydb()
-    conn = mydb.engine.connect()
-
-    try:
-        train_reviews = conn.execute("SELECT a.uid,review_text,a.does_like FROM qc.user_answers as a, qc.reviews as b where a.rid = b.id and a.uid = '"+target+"'")
-        test_reviews = conn.execute("SELECT * FROM qc.reviews as b where b.id not in(select rid from qc.user_answers where uid = '"+target+"') limit 10000")
-    except Exception:
-        return (-1,-1)
-    if not train_reviews.rowcount or not test_reviews.rowcount:
-        return (-2,-2)
-    conn.close()
+    train_reviews,test_reviews = data_retriever(target)
     #create processing block
     blc = nlpb.nlpblockbase()
     blc.set_params(target)
@@ -44,11 +41,11 @@ def main_func(target,tagger):
             #item,label
             blc.answers.append((row[1],row[2]))
         blc.train(tagger)
-        blc.save_model()
+        #blc.save_model()
     #print [y for (x,y) in blc.answers]
-    for row in test_reviews:
+    #for row in test_reviews:
         #print row
-        blc.batch_test.append((row[3],row[4]))
+        #blc.batch_test.append((row[0],row[2],row[3],row[4],row[7]))
     #print blc.batch_test
     #print blc.answers
 

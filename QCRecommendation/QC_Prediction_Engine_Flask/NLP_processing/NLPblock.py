@@ -34,6 +34,7 @@ class nlpblockbase:
     def set_params(self,name):
         self.user_id = name
 
+    #deprecated functions
     def train(self,tagger):
 
         featursets = [(self.feature_extration(n,tagger),like) for (n,like) in self.answers]
@@ -59,6 +60,15 @@ class nlpblockbase:
             return True
         return False
 
+    def predict(self,tagger):
+        #print self.batch_test
+        test_data = [self.feature_extration(x,tagger) for (x,y) in self.batch_test]
+        #print test_data
+        result = self.model.classify_many(test_data)
+        #iids = [y for (x,y) in self.batch_test]
+        return [(res,text,iid) for res,(text,iid) in zip(result,self.batch_test)]
+    #end of deprecated functions
+
     def feature_extration(self,review,tagger):
         #extract features
         features = {}
@@ -71,23 +81,18 @@ class nlpblockbase:
             for toke in tokes:
                 try:
                     toke = toke.decode('utf-8')
-                    tokens.append(toke)
+                    if toke:
+                        tokens.append(toke)
                 except:
                     continue
-            tags = tagger.tri_tagger.tag(tokens)
+            #print tokens
+            tags = nltk.pos_tag(tokens)
             #print tags
             for (x,y) in tags:
                 if y in tagger.target:
                     features[y] = features.get(y,0)+1
-
+        for t in tagger.target:
+            features[t] = features.get(t,0)
         #features['lastc'] = sent[-1]
 
         return features
-
-    def predict(self,tagger):
-        #print self.batch_test
-        test_data = [self.feature_extration(x,tagger) for (x,y) in self.batch_test]
-        #print test_data
-        result = self.model.classify_many(test_data)
-        #iids = [y for (x,y) in self.batch_test]
-        return [(res,text,iid) for res,(text,iid) in zip(result,self.batch_test)]
