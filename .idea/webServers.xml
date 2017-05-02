@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="d78e66a0-ea4a-4dc6-a89b-e8da7bfe6370" name="server" url="http://35.184.109.108">
+        <fileTransfer host="35.184.109.108" port="22" privateKey="D:\Personal\US\Columbia\Spring 2017\COMS 4156\Project\my-ssh-key-new.ppk" rootFolder="/home/ygu16/project/server_scripts" accessType="SFTP" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

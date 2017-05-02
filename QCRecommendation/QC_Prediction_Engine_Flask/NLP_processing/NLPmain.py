@@ -17,7 +17,7 @@ import csv
 def data_retriever(target):
     mydb = dbi.mydb()
     conn = mydb.engine.connect()
-    print 'nlpm',target,"select a.uid,a.does_like,b.*,c.subject FROM qc.user_answers a, qc.reviews b, qc.items c where a.rid = b.id and a.uid = '"+str(target)+"' and b.iid=c.id"
+    #print 'nlpm',target,"select a.uid,a.does_like,b.*,c.subject FROM qc.user_answers a, qc.reviews b, qc.items c where a.rid = b.id and a.uid = '"+str(target)+"' and b.iid=c.id"
     try:
         train_reviews = conn.execute("select a.uid,a.does_like,b.*,c.subject FROM qc.user_answers a, qc.reviews b, qc.items c where a.rid = b.id and a.uid = '"+str(target)+"' and b.iid=c.id").fetchall()
         test_reviews = conn.execute("select r.*,u.subject from qc.reviews r, qc.items u where r.iid = u.id and r.id not in(select rid from qc.user_answers where uid = '"+str(target)+"') limit 10").fetchall()

@@ -112,8 +112,7 @@ def kmeans_classification(sc,c_tag,util):
     print len(_data_)
     cnt = 0
     for row in _data_:
-        print row[0],row[1],row[-1]
-        clustered[clusters.predict(train_data[cnt])].append([row[0],row[2],row[3]])
+        clustered[clusters.predict(train_data[cnt])].append([row[0],row[2],row[3],row[4]])
         cnt += 1
     print len(clustered)
     for k in clustered.keys():
@@ -171,7 +170,7 @@ def saver(cols):
     '''
     return
 
-def recommendation(target,c_tag,util,sc):
+def recommendation(target,c_tag,util,sc,data_stash):
 
     train,test = nlpm.data_retriever(target)
 
@@ -201,29 +200,95 @@ def recommendation(target,c_tag,util,sc):
 
     sameModel = KMeansModel.load(sc, "MovieModel")
 
-    pre_classified = loader()
-
+    #pre_classified = loader()
+    targets = []
     for i,point in enumerate(train_data):
-        ptd = sameModel.predict(point)
-        print ptd
+        #cluster,rating,reviews,iid
+        targets.append([sameModel.predict(point),Likes[i][4],Likes[i][5],Likes[i][6]])
+    #print 'tar',targets
 
-    return
+    '''
+        Retrieve Corresponding List as potential recommendation
+    '''
+    __retrieved__ = []
+    for k in targets:
+        for item in data_stash[str(k[0])]:
+            __retrieved__.append((item,k[1],k[2],k[3]))
+    #print 'ret',__retrieved__
+    '''
+        Give More Weights to the reviews that are closer to the one user likes
 
-def nlp_cla_rec(mode=0,target=0):
+        Weight = sum(softmax(Rating(this_review),Rating(Parent_review),distance(this_review,parent_review))
+    '''
+    #blc.feature_extration(tmp[3], c_tag)
+    #__retrieved__ = sorted(__retrieved__,key=lambda x:sum(sf.softmax([x[0][2],x[1],blc.distance(blc.feature_extration(x[0][3]),blc.feature_extration(x[2])]))),reverse=True)
+    weighted = []
+    for x in __retrieved__:
+        #print len(x),len(x[0]),x[1],x[2]
+        pre = []
+        pre.append(float(x[0][1]))
+        pre.append(float(x[1]))
+        v1,v2 = [],[]
+        fet1 = blc.feature_extration(x[0][2],c_tag)
+        fet2 = blc.feature_extration(x[2],c_tag)
+
+        for k in fet1.keys():
+            v1.append(fet1[k])
+            v2.append(fet2[k])
+
+        pre.append(blc.distance(v1,v2))
+        #print pre
+        weight = sum(sf.softmax(pre))
+        weighted.append((weight,x[0][0]))
+    weighted = sorted(weighted,key=lambda x:x[0],reverse=True)
+
+    ans = []
+    marker = 100
+    for k in range(len(weighted)):
+        if k > 100:
+            break
+        #print weighted[k]
+        ans.append(weighted[k])
+    #print ans
+    items = get_iid_from_rid(ans)
+
+    res = [(str(1),str(x[0])) for x in items]
+
+    nlpm.cache_result(res, str(target))
+    print res
+    return res
+
+def get_iid_from_rid(rids):
+    query = "("
+    query = query + str(rids[0][1])
+    for rid in rids:
+        query = query + ","+str(rid[1])
+    query += ")"
+    mydb = dbi.mydb()
+    conn = mydb.engine.connect()
+
+    this_query = "select distinct(i.id) from qc.items i, qc.reviews r where r.iid = i.id and r.id in "
+    print this_query+query
+    try:
+       items = conn.execute(this_query+query)
+    except Exception:
+        return (-1,-1)
+    conn.close()
+
+    return items.fetchall()
+
+
+def nlp_cla_rec(sc,mode=0,target=0,data_stash=-1):
     util = ip.util()
     util.load()
     # set up environment
-    conf = SparkConf() \
-        .setAppName("MovieLensALS") \
-        .set("spark.executor.memory", "2g")
-    sc = SparkContext(conf=conf)
     data = [0]
 
     st = datetime.datetime.now()
 
     c_tagger = nlpt.nlp_tagger()
     #c_tagger.train()
-
+    res = []
     print 'Elapsed Time For Tagger:', (datetime.datetime.now() - st).total_seconds(), 's'
     if not mode:
         #__collection=my_test(sc,util,data)
@@ -246,13 +311,15 @@ def nlp_cla_rec(mode=0,target=0):
                 b. TOP 5 closest rid
                 return combined item for recommendation
         '''
-        recommendation(target,c_tagger,util,sc)
+        res = recommendation(target,c_tagger,util,sc,data_stash)
     ed = datetime.datetime.now()
 
     print 'Elapsed Time :', (ed - st).total_seconds(), 's'
     # clean up
-    sc.stop()
+    #sc.stop()
+    return res
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
     #nlp_cla_rec(0)
-    nlp_cla_rec(1,149)
+    #stash = loader()
+    #nlp_cla_rec(1,149,stash)

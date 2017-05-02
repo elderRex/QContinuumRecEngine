@@ -20,6 +20,8 @@ import collections
 import pickle
 import os.path
 import sys,os
+import numpy as np
+import math
 
 class nlpblockbase:
 
@@ -68,6 +70,12 @@ class nlpblockbase:
         #iids = [y for (x,y) in self.batch_test]
         return [(res,text,iid) for res,(text,iid) in zip(result,self.batch_test)]
     #end of deprecated functions
+
+    def distance(self,v1,v2):
+        t = 0
+        for x,y in zip(v1,v2):
+            t += (float(x)-float(y))**2
+        return math.sqrt(t)
 
     def feature_extration(self,review,tagger):
         #extract features

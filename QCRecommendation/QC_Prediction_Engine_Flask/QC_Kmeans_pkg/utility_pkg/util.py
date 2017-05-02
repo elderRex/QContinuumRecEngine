@@ -11,12 +11,12 @@ class utility:
 
         for k,f in zip(names,files):
             with open(parent_dir+f,'w+') as outfile:
-                fieldnames = ['rid','rating','review']
+                fieldnames = ['rid','rating','review','iid']
                 csvwriter = csv.DictWriter(outfile,fieldnames=fieldnames)
                 csvwriter.writeheader()
                 for j in __collection[k]:
                     #outfile.write(str(j)+'\n')
-                    csvwriter.writerow({'rid':j[0],'rating':j[1],'review':j[2]})
+                    csvwriter.writerow({'rid':j[0],'rating':j[1],'review':j[2],'iid':j[3]})
             outfile.close()
         print 'done'
 
