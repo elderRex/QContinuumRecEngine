@@ -13,8 +13,8 @@
 '''
 from QCRecommendation.QC_Prediction_Engine_Flask import db_initialization as dbi
 from nltk.classify import SklearnClassifier
-from sklearn.naive_bayes import BernoulliNB
-from sklearn.svm import SVC
+#from sklearn.naive_bayes import BernoulliNB
+#from sklearn.svm import SVC
 import nltk
 import collections
 import pickle
@@ -37,6 +37,7 @@ class nlpblockbase:
         self.user_id = name
 
     #deprecated functions
+    '''
     def train(self,tagger):
 
         featursets = [(self.feature_extration(n,tagger),like) for (n,like) in self.answers]
@@ -48,7 +49,7 @@ class nlpblockbase:
              return -1 #on fail
 
         return 1
-
+    '''
     def save_model(self):
         fname = self._path+'/saved_models/model'+self.user_id+".sav"
         with open(fname,'w+') as f:

@@ -8,10 +8,13 @@ from flask import Flask, request, render_template, g, redirect, Response,url_for
 from flask_cors import CORS,cross_origin
 
 #print sys.path
-sys.path.append("/home/ygu16/project/server_scripts")
-
-os.environ['SPARK_HOME'] = "/home/ygu16/srv/spark_a/spark-2.0.2-bin-hadoop2.7"
-sys.path.append("/home/ygu16/project/server_scripts/")
+#sys.path.append("/home/ygu16/project/server_scripts")
+os.environ['SPARK_HOME'] = "C:\Users\YuNick\Documents\spark-2.0.2-bin-hadoop2.7"
+# os.environ['SPARK_HOME'] = "/home/jie/d2/spark-0.9.1"
+# Append to PYTHONPATH so that pyspark could be found
+sys.path.append("C:\Users\YuNick\Documents\spark-2.0.2-bin-hadoop2.7\python")
+#os.environ['SPARK_HOME'] = "/home/ygu16/srv/spark_a/spark-2.0.2-bin-hadoop2.7"
+#sys.path.append("/home/ygu16/project/server_scripts/")
 
 # Now we are ready to import Spark Modules
 try:
@@ -40,10 +43,9 @@ pre_classified = nlpc.loader()
 app = Flask(__name__)
 CORS(app)
 
-conf = SparkConf() \
-        .setAppName("MovieLensALS") \
-        .set("spark.executor.memory", "2g")
-sc = SparkContext(conf=conf)
+#conf = SparkConf() .setAppName("MovieLensALS") .set("spark.executor.memory", "2g")
+#sc = SparkContext(conf=conf)
+sc = SparkContext()
 
 @app.route('/recommend_now/query',methods=['POST'])
 def Game_visualization_query_foo():

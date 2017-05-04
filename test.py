@@ -23,7 +23,7 @@ class FlaskrTestCase(unittest.TestCase):
         c_tagger.train()
         self.assertIsNotNone(nlpm.main_func('141',c_tagger))
         conn.close()
-
+    '''
     def setUp(self):
         self.app = flaskr.app.test_client()
 
@@ -40,6 +40,6 @@ class FlaskrTestCase(unittest.TestCase):
         assert '-1' not in rv.data
         rv = self.open_query('149')
         assert '-1' not in rv.data
-
+    '''
 if __name__ == '__main__':
     unittest.main()

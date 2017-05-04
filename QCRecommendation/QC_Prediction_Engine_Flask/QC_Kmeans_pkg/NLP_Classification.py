@@ -25,9 +25,9 @@ sys.path.append("/home/ygu16/project/server_scripts/")
 import QCRecommendation.QC_Prediction_Engine_Flask.NLP_processing.NLPtagger as nlpt
 import QCRecommendation.QC_Prediction_Engine_Flask.NLP_processing.NLPblock as nlpb
 import QCRecommendation.QC_Prediction_Engine_Flask.NLP_processing.NLPmain as nlpm
-import findspark
+#import findspark
 
-findspark.init()
+#findspark.init()
 
 # Now we are ready to import Spark Modules
 try:
